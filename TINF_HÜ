@@ -62,8 +62,8 @@
 ##chmod:
     *   EFAULT: pathname points to address space outside of your accessible adress space
 ##kill:
-    *   EINVAL: A invalid signal was specified
+    *   EINVAL: A invalid signal was specified  
 
 #Trap
 
-    *
+    *    rap is also known as exeption or fault, and it is a type of an synchronous interruption, by an sxceptional condition like a breakpoint or an error.
