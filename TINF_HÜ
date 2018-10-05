@@ -1,0 +1,69 @@
+#System Calls
+
+
+##fork():
+    *  creates a new process by duplicating the calling process.
+      The process is referred as child
+
+    *  On success, the PID of the child process is returned in the parent, and
+      0  is returned in the child.  On failure, -1 is returned in the parent,
+      no child process is created, and errno is set appropriately.
+
+##stat():
+    *  This functions return information about a file.
+    *  In the function call you have to send along the pathname and the buffer
+
+    *  On success, zero is returned.
+
+##kill():
+    *  The kill function can be used to send a specified signal to any process group or process.
+    *  (pid > 0)signal sig is sent to the process with the ID specified by pid
+    *  (pid == 0)sig is sent to every process in the process group of the calling process.
+    *  (pid == -1)sig is sent to every process for which the calling process has permission to send signals, except for process 1, but see below
+    *  (pid < -1)sig is sent to every process in the process group whose ID is -pid.
+    *  (sig == 0)no signal is sent, but existence and permission check are performed
+
+    *  On success (at least one signal was sent), zero is returned.
+
+##mmap:
+    *  creates a new mapping in the virtual address space of the calling process.
+    *  The starting address for the new mapping is specified in addr.  The length argument specifies the length of the mapping      (which must be greater than 0).
+    *  (addr == NULL)kernel choses address
+    *  (addr != NULL)kernel takes it as a hint where to place the mapping
+
+    *  On success, mmap() returns a pointer to the mapped area.  On error,
+      the value MAP_FAILED (that is, (void * ) -1) is returned
+
+##chmod:
+    *  changes the mode of the file specified whose pathname is
+      given in pathname, which is dereferenced if it is a symbolic link.
+
+    *   On success, zero is returned.
+##waitpid:
+    *   waits for a process to change its state
+    *   status is the pointer to the position, where the actual status is stored
+
+    *   On success, returns the process ID of the child whose state has changed
+
+#Errors
+
+##fork:
+    *   ENOSYS: fork() is not supported on this platform
+##exec:
+    *   EACCES: The file called is not a regular file.
+                You don't have the execute permission for this failure.
+                The filesystem is mounted noexec
+##unlink:
+    *   EBUSY:  The file pathname can't be unlinked because it's used by the system or by a process.
+##read:
+    *   EBADF:  The file discriptor fd is not valid or the file can't be read.
+##mount:
+    *   EPERM:  The caller doesn't have the permisson to mount the required file
+##chmod:
+    *   EFAULT: pathname points to address space outside of your accessible adress space
+##kill:
+    *   EINVAL: A invalid signal was specified
+
+#Trap
+
+    *
